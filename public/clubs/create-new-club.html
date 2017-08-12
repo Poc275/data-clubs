@@ -1,0 +1,50 @@
+<md-dialog aria-label="create new data club">
+    <form ng-cloak name="newClubForm" ng-submit="newClubForm.$valid && onSubmit()" novalidate>
+        <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create new Data Club</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+            <md-icon md-svg-src="images/icons/ic_close_white_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content" layout="column">
+                <md-input-container>
+                    <label>Club name</label>
+                    <input type="text" id="name" name="name" ng-model="club.name" required>
+                    <div ng-messages="newClubForm.name.$error">
+                        <div ng-message="required">This is required</div>
+                    </div>
+                </md-input-container>
+            
+                <md-input-container>
+                    <label>Description</label>
+                    <textarea rows="3" id="description" name="description" ng-model="club.description"></textarea>
+                </md-input-container>
+            
+                <md-input-container>
+                    <label>Tags</label>
+                    <input type="text" id="tags" name="tags" ng-model="club.tags" required>
+                </md-input-container>
+            
+                <md-input-container>
+                    <md-switch ng-model="club.open" ng-init="club.open = 'Closed'" ng-true-value="'Open'" ng-false-value="'Closed'" aria-label="open/closed club switch">
+                        {{ club.open }}
+                    </md-switch> 
+                </md-input-container>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-input-container>
+                <md-button class="md-raised md-primary" type="submit">Create</md-button>
+                <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+            </md-input-container>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

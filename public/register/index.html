@@ -1,0 +1,56 @@
+<div layout="column" layout-align="center center">
+    <h1 class="md-display-1">Create Account</h1>
+
+    <img src="images/logo-wide.jpeg" alt="logo" class="logo" />
+
+    <form name="registrationForm" ng-submit="registrationForm.$valid && onSubmit()" novalidate layout="column" layout-align="center center">
+        <md-input-container>
+            <label>Full name</label>
+            <input type="text" id="name" name="name" ng-model="credentials.name" required>
+            <div ng-messages="registrationForm.name.$error">
+                <div ng-message="required">This is required</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Email</label>
+            <input type="email" id="email" name="email" ng-model="credentials.email" required>
+            <div ng-messages="registrationForm.email.$error">
+                <div ng-message="required">This is required</div>
+                <div ng-message="email">This needs to be a valid email</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Password</label>
+            <input type="password" id="password" name="password" ng-model="credentials.password" required>
+            <div ng-messages="registrationForm.password.$error">
+                <div ng-message="required">This is required</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" ng-model="credentials.confirmPassword" 
+                ng-change="validatePassword(registrationForm)" required>
+            <div ng-messages="registrationForm.confirmPassword.$error">
+                <div ng-message="required">This is required</div>
+                <div ng-message="validationError">Passwords do not match</div>
+            </div>
+        </md-input-container>
+
+        <md-input-container>
+            <label>Organisation</label>
+            <input type="text" id="organisation" name="organisation" ng-model="credentials.organisation" required>
+            <div ng-messages="registrationForm.organisation.$error">
+                <div ng-message="required">This is required</div>
+            </div>
+        </md-input-container>
+
+        <md-button class="md-raised md-primary" type="submit">Register</md-button>
+        <div class="separator">
+            <span class="text">OR</span>
+        </div>
+        <md-button class="md-raised" ui-sref="root">Sign In</md-button>
+    </form>
+</div>

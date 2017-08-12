@@ -1,0 +1,39 @@
+.logo {
+    margin-bottom: 16px;
+    width: 300px;
+}
+
+.separator {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 24px auto 16px auto;
+    position: relative;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.text {
+    display: inline-block;
+    vertical-align: baseline;
+    position: relative;
+    padding: 0 8px;
+}
+
+.text::before {
+    content: '';
+    display: block;
+    width: 30px;
+    position: absolute;
+    top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    right: 100%;
+}
+
+.text::after {
+    content: '';
+    display: block;
+    width: 30px;
+    position: absolute;
+    top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    left: 100%;
+}
