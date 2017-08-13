@@ -5,6 +5,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var uuid = require('uuid');
+var multer = require('multer');
+var multerAzure = require('multer-azure');
+var upload = multer({
+    storage: multerAzure({
+        connectionString: 'DefaultEndpointsProtocol=https;AccountName=dataclubs;AccountKey=mVAway35IaB524vtrN5SdamkxuLl///LV4Xfd0/30JNG5Y6c0GfMyNazBYBWCG6idH1UPUcjVgU2fTdLdPSx6Q==;EndpointSuffix=core.windows.net',
+        container: 'datasets'
+    })
+});
 var passport = require('passport');
 // we have to initialise passport.js before we can use it
 // (see app.use(passport.initilize() below)
@@ -36,9 +44,12 @@ var options = {
 mongoose.connect('mongodb://dcadmin:W1lk0m3nn!@ds038319.mlab.com:38319/dc', {
     useMongoClient: true
 });
+// note we don't need require for User because this has already been included in config/passport.js
 require('../models/Club');
+require('../models/Dataset');
 var User = mongoose.model('User');
 var Club = mongoose.model('Club');
+var Dataset = mongoose.model('Dataset');
 
 app.use(favicon(path.join(__dirname, '../public', 'images', 'favicon.ico')));
 app.use(bodyParser.json());
@@ -113,6 +124,29 @@ app.post('/api/create/club', isAuthenticated, function(req, res) {
             console.log(err);
             res.status(500).end();
         }
+        res.status(200).end();
+    });
+});
+
+app.post('/api/create/dataset/', isAuthenticated, upload.single('file'), function(req, res) {
+    console.log(req.file);
+    console.log(req.body);
+
+    var newDataset = new Dataset();
+
+    newDataset.name = req.body.name;
+    newDataset.description = req.body.description;
+    newDataset.tags = req.body.tags;
+    newDataset.owner = req.user.email;
+    newDataset.type = req.file.mimetype;
+    newDataset.url = req.file.url;
+
+    newDataset.save(function(err) {
+        if(err) {
+            console.log(err);
+            res.status(500).end();
+        }
+
         res.status(200).end();
     });
 });

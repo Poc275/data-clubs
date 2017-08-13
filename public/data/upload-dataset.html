@@ -1,0 +1,60 @@
+<md-dialog aria-label="upload dataset">
+    <form ng-cloak name="uploadDataset" ng-submit="uploadDataset.$valid && onSubmit()" novalidate>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Upload dataset</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="images/icons/ic_close_white_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content" layout="column">
+                <md-input-container>
+                    <label>Dataset name</label>
+                    <input type="text" id="name" name="name" ng-model="dataset.name" required>
+                    <div ng-messages="uploadDataset.name.$error">
+                        <div ng-message="required">This is required</div>
+                    </div>
+                </md-input-container>
+            
+                <md-input-container>
+                    <label>Description</label>
+                    <textarea rows="3" id="description" name="description" ng-model="dataset.description"></textarea>
+                </md-input-container>
+            
+                <md-input-container>
+                    <label>Tags</label>
+                    <input type="text" id="tags" name="tags" ng-model="dataset.tags" required>
+                </md-input-container>
+            
+
+                <div id="files-drop-zone" nv-file-drop uploader="uploader">Drop file here</div>
+
+                <div class="separator">
+                    <span class="text">OR</span>
+                </div>
+
+                <input type="file" nv-file-select uploader="uploader"/>
+
+                <ul>
+                    <li ng-repeat="item in uploader.queue">
+                        Name: <span ng-bind="item.file.name"></span><br/>
+                        <!-- <button ng-click="item.upload()">upload</button> -->
+                    </li>
+                </ul>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-input-container>
+                <md-button class="md-raised md-primary" type="submit">Upload</md-button>
+                <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+            </md-input-container>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

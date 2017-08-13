@@ -1,13 +1,13 @@
 var mongoose = require('mongoose');
 
-var clubSchema = new mongoose.Schema({
+var datasetSchema = new mongoose.Schema({
 	name: { type: String, required: true },
 	description: { type: String },
     tags: { type: String },
-    open: { type: Boolean, required: true },
     owner: { type: String, required: true },
-    members: { type: Array }
+    type: { type: String },
+    url: { type: String, required: true }
 });
 
 // assign schema to model
-mongoose.model('Club', clubSchema);
+mongoose.model('Dataset', datasetSchema);

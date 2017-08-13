@@ -37,3 +37,9 @@
     border-top: 1px solid rgba(0, 0, 0, 0.12);
     left: 100%;
 }
+
+#files-drop-zone {
+    border: 3px dotted lightgray;
+    border-radius: 4px;
+    padding: 40px;
+}

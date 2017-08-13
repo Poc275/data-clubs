@@ -1,4 +1,4 @@
-angular.module('DataClubsModule', ['ngMaterial', 'ngAnimate', 'ngMessages', 'ui.router'])
+angular.module('DataClubsModule', ['ngMaterial', 'ngAnimate', 'ngMessages', 'ui.router', 'angularFileUpload'])
     .config(function($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('blue', {
