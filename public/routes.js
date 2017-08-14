@@ -36,5 +36,11 @@ angular.module('DataClubsModule').config(function($stateProvider, $urlRouterProv
             url: '/help',
             templateUrl: '/profile/help.html',
             controller: 'profileCtrl'
+        })
+        .state('profile.viewClub', {
+            url: '/club/:name',
+            templateUrl: '/clubs/view-club-admin.html',
+            controller: 'clubCtrl',
+            params: { clubId: null }    // pass club id in stateParams
         });
     });

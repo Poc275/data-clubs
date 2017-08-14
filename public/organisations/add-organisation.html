@@ -1,0 +1,90 @@
+<md-dialog aria-label="Add/create organisation for the club">
+    
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Add Organisation to {{ clubName }}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="images/icons/ic_close_white_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+            <md-tabs md-dynamic-height md-border-bottom>
+                <!-- tab 1 - add org -->
+                <md-tab label="add">
+                    <md-content class="md-padding">
+                        <form ng-cloak name="addOrganisation" ng-submit="addOrganisation.$valid && addOrgOnSubmit()" novalidate>
+                            <md-input-container>
+                                <label>Select organisation</label>
+                                <md-select id="name" name="name" placeholder="Select organisation" ng-model="addOrgModel.orgId" md-on-open="getOrganisations()" required>
+                                    <md-option ng-value="org._id" ng-repeat="org in orgs">
+                                        {{ org.name }}
+                                    </md-option>
+                                </md-select>
+                                <div ng-messages="addOrganisation.name.$error">
+                                        <div ng-message="required">This is required</div>
+                                    </div>
+                            </md-input-container>
+    
+                            <md-dialog-actions layout="row">
+                                <span flex></span>
+                                <md-input-container>
+                                    <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+                                    <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+                                </md-input-container>
+                            </md-dialog-actions>
+                        </form>
+                    </md-content>
+                </md-tab>
+
+                <!-- Tab 2 - create new org -->
+                <md-tab label="create">
+                    <md-content class="md-padding">
+                        <form ng-cloak name="createOrganisation" ng-submit="createOrganisation.$valid && createOrgOnSubmit()" novalidate>
+                            <md-input-container>
+                                <label>Organisation name</label>
+                                <input type="text" id="name" name="name" ng-model="organisation.name" required>
+                                <div ng-messages="createOrganisation.name.$error">
+                                    <div ng-message="required">This is required</div>
+                                </div>
+                            </md-input-container>
+
+                            <p>Logo:</p>
+                            <div id="files-drop-zone" nv-file-drop uploader="uploader">Drop file here</div>
+                            
+                            <div class="separator">
+                                <span class="text">OR</span>
+                            </div>
+            
+                            <input type="file" nv-file-select uploader="uploader"/>
+
+                            <ul>
+                                <li ng-repeat="item in uploader.queue">
+                                    Name: <span ng-bind="item.file.name"></span><br/>
+                                </li>
+                            </ul>
+
+                            <md-input-container>
+                                <p>Organisation type:</p>
+                                <md-radio-group ng-model="organisation.type">
+                                    <md-radio-button value="Customer" class="md-primary">Customer</md-radio-button>
+                                    <md-radio-button value="Partner">Partner</md-radio-button>
+                                    <md-radio-button value="SME">SME</md-radio-button>
+                                </md-radio-group>
+                            </md-input-container>
+
+                            <md-dialog-actions layout="row">
+                                <span flex></span>
+                                <md-input-container>
+                                    <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+                                    <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+                                </md-input-container>
+                            </md-dialog-actions>
+                        </form>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+</md-dialog>

@@ -1,7 +1,16 @@
-angular.module('DataClubsModule').controller('profileCtrl', function($scope, $http, $state, $mdDialog, Clubs) {
+angular.module('DataClubsModule').controller('profileCtrl', function($scope, $http, $state, $mdDialog, $location,
+                                                                        $stateParams, Clubs, User) {
     $scope.currentNavItem = 'clubs';
     $scope.customFullscreen = false;
     
+    // get profile info
+    $scope.getMyProfile = function() {
+        User.me().then(function(user) {
+            $scope.profile = user.data;
+        }, function(err) {
+            console.log(err);
+        });
+    };
 
     $scope.getMyClubs = function() {
         Clubs.myClubs().then(function(clubs) {
@@ -49,7 +58,13 @@ angular.module('DataClubsModule').controller('profileCtrl', function($scope, $ht
         });
     };
 
-    $scope.getMyClubs();
+    $scope.signOut = function() {
+        $http.get('/api/logout').then(function() {
+            $location.path('/');
+        }, function(err) {
+            console.log(err);
+        });
+    };
 
     // in-line controller for the create new club dialog
     function CreateClubDialogController($scope, $mdDialog, Clubs) {
@@ -119,5 +134,8 @@ angular.module('DataClubsModule').controller('profileCtrl', function($scope, $ht
             $mdDialog.cancel();
         };
     }
+
+    $scope.getMyClubs();
+    $scope.getMyProfile();
 
 });

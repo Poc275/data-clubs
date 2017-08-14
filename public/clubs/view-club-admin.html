@@ -1,0 +1,12 @@
+<h1>{{ clubName }}</h1>
+
+<p>Member organisations</p>
+
+<ul>
+    <li ng-repeat="org in clubOrganisations">
+        <img ng-src="{{ org.logoUrl }}" alt="organisation logo" style="width: 75px;" />
+        {{ org.name }} - {{ org.type }}
+    </li>
+</ul>
+
+<md-button class="md-raised" ng-click="showOrganisationDialog($event)">Add organisation</md-button>

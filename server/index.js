@@ -47,9 +47,11 @@ mongoose.connect('mongodb://dcadmin:W1lk0m3nn!@ds038319.mlab.com:38319/dc', {
 // note we don't need require for User because this has already been included in config/passport.js
 require('../models/Club');
 require('../models/Dataset');
+require('../models/Organisation');
 var User = mongoose.model('User');
 var Club = mongoose.model('Club');
 var Dataset = mongoose.model('Dataset');
+var Organisation = mongoose.model('Organisation');
 
 app.use(favicon(path.join(__dirname, '../public', 'images', 'favicon.ico')));
 app.use(bodyParser.json());
@@ -110,6 +112,23 @@ app.post('/api/login', passport.authenticate('local'), function(req, res) {
     res.status(200).end();
 });
 
+app.get('/api/logout', function(req, res) { 
+    // req.logout() provided by passport
+	req.logout();
+	res.status(200).end();
+});
+
+app.get('/api/me', isAuthenticated, function(req, res) {
+    var user = {
+        name: req.user.name,
+        email: req.user.email,
+        organisation: req.user.organisation,
+        admin: req.user.admin
+    };
+
+    res.json(user);
+});
+
 app.post('/api/create/club', isAuthenticated, function(req, res) {
     var newClub = new Club();
 
@@ -129,9 +148,6 @@ app.post('/api/create/club', isAuthenticated, function(req, res) {
 });
 
 app.post('/api/create/dataset/', isAuthenticated, upload.single('file'), function(req, res) {
-    console.log(req.file);
-    console.log(req.body);
-
     var newDataset = new Dataset();
 
     newDataset.name = req.body.name;
@@ -144,6 +160,47 @@ app.post('/api/create/dataset/', isAuthenticated, upload.single('file'), functio
     newDataset.save(function(err) {
         if(err) {
             console.log(err);
+            res.status(500).end();
+        }
+
+        res.status(200).end();
+    });
+});
+
+app.post('/api/create/organisation/', isAuthenticated, upload.single('file'), function(req, res) {
+    var newOrganisation = new Organisation();
+
+    newOrganisation.name = req.body.name;
+    newOrganisation.logoUrl = req.file.url;
+    newOrganisation.type = req.body.type;
+
+    newOrganisation.save(function(err) {
+        if(err) {
+            console.log(err);
+            res.status(500).end();
+        }
+
+        // add organisation to club
+        Club.update(
+            { _id: req.body.clubId },
+            { $push: { organisations: newOrganisation._id }
+        }, function(err, result) {
+            if(err) {
+                res.status(500).end();
+            }
+
+            res.status(200).end();
+        });
+    });
+});
+
+app.post('/api/add/organisation', isAuthenticated, function(req, res) {
+    // add organisation to club
+    Club.update(
+        { _id: req.body.clubId },
+        { $push: { organisations: mongoose.Types.ObjectId(req.body.orgId) }
+    }, function(err, result) {
+        if(err) {
             res.status(500).end();
         }
 
@@ -175,6 +232,36 @@ app.get('/api/me/clubs/', isAuthenticated, function(req, res) {
             res.json(clubs);
         });
     }
+});
+
+app.get('/api/club/:id/organisations', isAuthenticated, function(req, res) {
+	Club.aggregate([
+        { $match: { _id: mongoose.Types.ObjectId(req.params.id) }},
+        { $project: { _id: false, organisations: true }}],
+    function(err, orgIds) {
+        if(err) {
+            res.status(500).end();
+        }
+
+        // now we have the member org ids, fetch the organisation objects
+        Organisation.find({ _id: { $in: orgIds[0].organisations }}, function(err, orgs) {
+            if(err) {
+                res.status(500).end();
+            }
+
+            res.json(orgs);
+        });
+    });
+});
+
+app.get('/api/organisations/all', isAuthenticated, function(req, res) {
+    Organisation.find({}, function(err, orgs) {
+        if(err) {
+            res.status(500).end();
+        }
+
+        res.json(orgs);
+    });
 });
 
 

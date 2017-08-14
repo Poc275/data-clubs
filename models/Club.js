@@ -6,7 +6,8 @@ var clubSchema = new mongoose.Schema({
     tags: { type: String },
     open: { type: Boolean, required: true },
     owner: { type: String, required: true },
-    members: { type: Array }
+    members: { type: Array },
+    organisations: { type: Array }
 });
 
 // assign schema to model

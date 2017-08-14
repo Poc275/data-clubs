@@ -1,10 +1,23 @@
-<md-button class="md-raised md-primary" ng-click="showCreateClubDialog($event)">+ New Club</md-button>
+<md-button class="md-raised md-primary" ng-click="showCreateClubDialog($event)" ng-if="profile.admin">+ New Club</md-button>
 
 <h1>My Clubs</h1>
 
-<ul>
-    <li ng-repeat="club in myClubs">
-        {{ club.name }}
-    </li>
-</ul>
+<table>
+    <tr>
+        <th>Club Name</th>
+        <th>Description</th>
+        <th>Tags</th>
+        <th>Open/Closed</th>
+    </tr>
+
+    <tr ng-repeat="club in myClubs">
+        <td>{{ club.name }}</td>
+        <td>{{ club.description }}</td>
+        <td>{{ club.tags }}</td>
+        <td>{{ club.open ? 'Open' : 'Closed' }}</td>
+        <td ng-if="profile.admin">
+            <md-button class="md-raised" ui-sref="profile.viewClub({ name: club.name, clubId: club._id })">Admin</md-button>
+        </td>
+    </tr>
+</table>
 
