@@ -43,3 +43,7 @@
     border-radius: 4px;
     padding: 40px;
 }
+
+ul {
+    list-style: none;
+}

@@ -1,0 +1,61 @@
+<md-dialog aria-label="create new organisation member">
+    <form ng-cloak name="newMemberForm" ng-submit="newMemberForm.$valid && onSubmit()" novalidate>
+        <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create new Organisation Member for {{ orgName }}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="images/icons/ic_close_white_24px.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content" layout="column">
+                    <md-input-container>
+                        <label>Full name</label>
+                        <input type="text" id="name" name="name" ng-model="member.name" required>
+                        <div ng-messages="newMemberForm.name.$error">
+                            <div ng-message="required">This is required</div>
+                        </div>
+                    </md-input-container>
+            
+                    <md-input-container>
+                        <label>Email</label>
+                        <input type="email" id="email" name="email" ng-model="member.email" required>
+                        <div ng-messages="newMemberForm.email.$error">
+                            <div ng-message="required">This is required</div>
+                            <div ng-message="email">This needs to be a valid email</div>
+                        </div>
+                    </md-input-container>
+            
+                    <md-input-container>
+                        <label>Password</label>
+                        <input type="password" id="password" name="password" ng-model="member.password" required>
+                        <div ng-messages="newMemberForm.password.$error">
+                            <div ng-message="required">This is required</div>
+                        </div>
+                    </md-input-container>
+            
+                    <md-input-container>
+                        <label>Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" ng-model="member.confirmPassword" 
+                            ng-change="validatePassword(newMemberForm)" required>
+                        <div ng-messages="newMemberForm.confirmPassword.$error">
+                            <div ng-message="required">This is required</div>
+                            <div ng-message="validationError">Passwords do not match</div>
+                        </div>
+                    </md-input-container>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-input-container>
+                <md-button class="md-raised md-primary" type="submit">Create</md-button>
+                <md-button class="md-raised" ng-click="cancel()">Cancel</md-button>
+            </md-input-container>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

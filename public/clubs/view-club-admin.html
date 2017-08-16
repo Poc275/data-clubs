@@ -1,12 +1,18 @@
+<md-button class="md-raised md-primary" ng-click="showOrganisationDialog($event)">Add organisation</md-button>
+
 <h1>{{ clubName }}</h1>
-
 <p>Member organisations</p>
+<table>
+    <tr>
+        <th>Organisation Name</th>
+        <th>Type</th>
+    </tr>
 
-<ul>
-    <li ng-repeat="org in clubOrganisations">
-        <img ng-src="{{ org.logoUrl }}" alt="organisation logo" style="width: 75px;" />
-        {{ org.name }} - {{ org.type }}
-    </li>
-</ul>
-
-<md-button class="md-raised" ng-click="showOrganisationDialog($event)">Add organisation</md-button>
+    <tr ng-repeat="org in clubOrganisations">
+        <td>{{ org.name }}</td>
+        <td>{{ org.type }}</td>
+        <td ng-if="profile.admin">
+            <md-button class="md-raised" ui-sref="profile.viewOrganisation({ org: org.name, orgId: org._id, orgLogoUrl: org.logoUrl })">Admin</md-button>
+        </td>
+    </tr>
+</table>

@@ -15,7 +15,10 @@ angular.module('DataClubsModule').config(function($stateProvider, $urlRouterProv
         .state('profile', {
             url: '/profile',
             templateUrl: '/profile/index.html',
-            controller: 'profileCtrl'
+            controller: 'profileCtrl',
+            // added state params to parent state so that they 
+            // don't get reset when transitioning between child states
+            params: { clubId: null, orgId: null, orgLogoUrl: null }
         })
         .state('profile.clubs', {
             url: '/clubs',
@@ -40,7 +43,11 @@ angular.module('DataClubsModule').config(function($stateProvider, $urlRouterProv
         .state('profile.viewClub', {
             url: '/club/:name',
             templateUrl: '/clubs/view-club-admin.html',
-            controller: 'clubCtrl',
-            params: { clubId: null }    // pass club id in stateParams
+            controller: 'clubCtrl'
+        })
+        .state('profile.viewOrganisation', {
+            url: '/organisation/:org',
+            templateUrl: '/organisations/view-organisation-admin.html',
+            controller: 'organisationCtrl'
         });
     });

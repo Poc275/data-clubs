@@ -129,6 +129,30 @@ app.get('/api/me', isAuthenticated, function(req, res) {
     res.json(user);
 });
 
+app.get('/api/me/clubs/', isAuthenticated, function(req, res) {
+    if(req.user.admin) {
+        // return all clubs
+        Club.find({}, function(err, clubs) {
+            if(err) {
+                res.status(500).end();
+            }
+
+            res.json(clubs);
+        });
+    } else {
+        // just the ones the user is an owner or member of
+        Club.find(
+            { "organisations": { $elemMatch: { $eq: mongoose.Types.ObjectId(req.user.organisation) } }
+        }, function(err, clubs) {
+            if(err) {
+                res.status(500).end();
+            }
+
+            res.json(clubs);
+        });
+    }
+});
+
 app.post('/api/create/club', isAuthenticated, function(req, res) {
     var newClub = new Club();
 
@@ -194,6 +218,35 @@ app.post('/api/create/organisation/', isAuthenticated, upload.single('file'), fu
     });
 });
 
+app.post('/api/create/organisation/member', isAuthenticated, function(req, res) {
+    var newUser = new User();
+
+    newUser.name = req.body.name;
+    newUser.email = req.body.email;
+    newUser.organisation = mongoose.Types.ObjectId(req.body.organisation);
+    newUser.setPassword(req.body.password);
+    newUser.admin = false;
+
+    newUser.save(function(err) {
+        if(err) {
+            console.log(err);
+            res.status(500).end();
+        }
+        
+        // now add the user to the organisation members collection
+        Organisation.update(
+            { _id: req.body.organisation },
+            { $push: { members: newUser._id }
+        }, function(err, result) {
+            if(err) {
+                res.status(500).end();
+            }
+    
+            res.status(200).end();
+        });
+    });
+});
+
 app.post('/api/add/organisation', isAuthenticated, function(req, res) {
     // add organisation to club
     Club.update(
@@ -206,32 +259,6 @@ app.post('/api/add/organisation', isAuthenticated, function(req, res) {
 
         res.status(200).end();
     });
-});
-
-app.get('/api/me/clubs/', isAuthenticated, function(req, res) {
-    if(req.user.admin) {
-        // return all clubs
-        Club.find({}, function(err, clubs) {
-            if(err) {
-                res.status(500).end();
-            }
-
-            res.json(clubs);
-        });
-    } else {
-        // just the ones the user is an owner or member of
-        Club.find({
-            $or: [
-                { "owner": req.user.email },
-                { "members": { $elemMatch: { $eq: req.user.email } } }
-        ]}, function(err, clubs) {
-            if(err) {
-                res.status(500).end();
-            }
-
-            res.json(clubs);
-        });
-    }
 });
 
 app.get('/api/club/:id/organisations', isAuthenticated, function(req, res) {
@@ -261,6 +288,27 @@ app.get('/api/organisations/all', isAuthenticated, function(req, res) {
         }
 
         res.json(orgs);
+    });
+});
+
+app.get('/api/organisations/:id/members', isAuthenticated, function(req, res) {
+	Organisation.aggregate([
+        { $match: { _id: mongoose.Types.ObjectId(req.params.id) }},
+        { $project: { _id: false, members: true }}],
+    function(err, orgMembers) {
+        if(err) {
+            res.status(500).end();
+        }
+
+        // now we have the member ids, fetch the user objects
+        // TODO: omit password hash and salt from return...
+        User.find({ _id: { $in: orgMembers[0].members }}, function(err, members) {
+            if(err) {
+                res.status(500).end();
+            }
+
+            res.json(members);
+        });
     });
 });
 

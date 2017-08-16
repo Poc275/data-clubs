@@ -1,10 +1,10 @@
-angular.module('DataClubsModule').controller('clubCtrl', function($scope, $http, $state, $mdDialog, $location, $stateParams, Organisation) {
+angular.module('DataClubsModule').controller('clubCtrl', function($scope, $http, $state, $mdDialog, $location, $stateParams, Clubs, Organisation) {
     $scope.clubName = $stateParams.name;
     $scope.clubId = $stateParams.clubId;
 
     // load organisations for this club
     $scope.getClubOrganisations = function() {
-        Organisation.getMembers($scope.clubId).then(function(orgs) {
+        Clubs.getMembers($scope.clubId).then(function(orgs) {
             $scope.clubOrganisations = orgs.data;
         }, function(err) {
             console.log(err);
@@ -17,7 +17,7 @@ angular.module('DataClubsModule').controller('clubCtrl', function($scope, $http,
           templateUrl: '/organisations/add-organisation.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose:true
+          clickOutsideToClose: true
         })
         .then(function(answer) {
             // update list of orgs
