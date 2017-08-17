@@ -1,32 +1,71 @@
-<div layout="column" layout-align="center center">
-    <h1 class="md-display-1">Log In</h1>
+<nav>
+    <div class="nav-wrapper" layout="row">
+        <h1><a href="/">Data Clubs</a></h1>
+        <span flex></span>
+        <ul class="nav-menu" layout="row">
+            <li><a ui-sref="login">Login</a></li>
+            <li><a ui-sref="register">Register<a></li>
+        </ul>
+    </div>
+</nav>
 
-    <img src="images/logo-wide.jpeg" alt="logo" class="logo" />
-
-    <form name="loginForm" ng-submit="loginForm.$valid && onSubmit()" novalidate layout="column" layout-align="center center">
-        <md-input-container>
-            <label>Email</label>
-            <input type="email" id="email" name="email" ng-model="credentials.email" required>
-            <div ng-messages="loginForm.email.$error">
-                <div ng-message="required">This is required</div>
-                <div ng-message="email">This needs to be a valid email</div>
-                <div ng-message="loginError">Credentials invalid</div>
-            </div>
-        </md-input-container>
-
-        <md-input-container>
-            <label>Password</label>
-            <input type="password" id="password" name="password" ng-model="credentials.password" required>
-            <div ng-messages="loginForm.password.$error">
-                <div ng-message="required">This is required</div>
-                <div ng-message="loginError">Credentials invalid</div>
-            </div>
-        </md-input-container>
-
-        <md-button class="md-raised md-primary" type="submit">Sign in</md-button>
-        <div class="separator">
-            <span class="text">OR</span>
+<div class="home-banner">
+    <header>
+        <div class="hero-text">
+            <h1>Helping customers with safeguarded sharing of data to gain operational efficiency.</h1>
         </div>
-        <md-button class="md-raised" ui-sref="register">Create Account</md-button>
-    </form>
+        <img class="hero-banner" src="images/main-bg.svg" alt="banner background image" />
+
+        <div class="video">
+            <div class="video-container">
+                <video controls>
+                    <source src="videos/dataclubs-animation.mp4" type="video/mp4">
+                    I'm sorry, your browser doesn't support HTML5 video in MP4 format
+                </video>
+            </div>
+        </div>
+    </header>
+
+    <section class="main-info">
+        <h2>Data Clubs</h2>
+        <h4>Proprietary Operational Data Sharing Framework</h4>
+        <p>Airlines are undergoing a profound shift in their view  of how data can transform 
+            their operational and maintenance performance. The imperative to achieve substantial 
+            year-on-year efficiency savings driving the search for a credible partner with subject matter and data expertise.</p>
+
+        <p>Airlines remain unable to reap the promise of big data.</p>
+
+        <p>Digital is uniquely suited to re-imagine data as a collaborative effort and have established Data Clubs.</p>
+
+        <p>Data Clubs are a fusion of world class engineering and thought leadership n the pragmatic use of Big Data, A.I. 
+            and Machine Learning. A highly secure, highly visual platform where relative performance can be understood 
+            in a secure-proof environment.</p>
+    </section>
+
+    <section class="reports-info">
+        <h2>Powerful Data Reports</h2>
+        <p>Gain powerful reports providing insight into your data. Interactive by design, the value of insight is 
+            multiplied as aggregated data sets provide more ammunition for our world-class data scientists to provide 
+            incredible insight to airlines.</p>
+
+        <h2>Leading Data Analytics</h2>
+        <p>Through Data Clubs you get access to world-leading Data Scientists and our carefully selected 
+            Small &amp; Medium Enterprise (SME) partners who will deliver analytics fueled by latest technology 
+            in Machine Learning (ML) and Artifiial Intelligence (AI).</p>
+
+        <h2>Secure Data Ingestion</h2>
+        <p>We ingest data in a secure manner. You have full control over your data and how it gets utilised in Data Clubs. 
+            We offer multiple sources of data ingestion to our customers and 3rd party data publishers. All supported by PODAF.</p>
+    </section>
+
+    <section class="tagline-banner">
+        <h2>Delivering Results</h2>
+        <p>Helping customers with safeguarded sharing of data to gain operational efficiency.</p>
+    </section>
+
+    <footer>
+        <section class="footer-banner">
+            <p>&copy; 2017. Data Clubs.</p>
+        </section>
+    </footer>
 </div>

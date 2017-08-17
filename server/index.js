@@ -94,7 +94,7 @@ app.post('/api/register', function(req, res) {
 
     newUser.name = req.body.name;
     newUser.email = req.body.email;
-    newUser.organisation = req.body.organisation;
+    newUser.organisation = mongoose.Types.ObjectId(req.body.organisation);
     newUser.setPassword(req.body.password);
     newUser.admin = false;
 
@@ -177,9 +177,11 @@ app.post('/api/create/dataset/', isAuthenticated, upload.single('file'), functio
     newDataset.name = req.body.name;
     newDataset.description = req.body.description;
     newDataset.tags = req.body.tags;
-    newDataset.owner = req.user.email;
+    newDataset.owner = mongoose.Types.ObjectId(req.user.organisation);
     newDataset.type = req.file.mimetype;
     newDataset.url = req.file.url;
+    // if user is admin, assume dataset is sponsored, otherwise false
+    newDataset.sponsored = req.user.admin;
 
     newDataset.save(function(err) {
         if(err) {
@@ -187,7 +189,17 @@ app.post('/api/create/dataset/', isAuthenticated, upload.single('file'), functio
             res.status(500).end();
         }
 
-        res.status(200).end();
+        // now add the dataset to the appropriate club
+        Club.update(
+            { _id: req.body.clubId },
+            { $push: { datasets: newDataset._id }
+        }, function(err, result) {
+            if(err) {
+                res.status(500).end();
+            }
+
+            res.status(200).end();
+        });
     });
 });
 
@@ -278,6 +290,38 @@ app.get('/api/club/:id/organisations', isAuthenticated, function(req, res) {
 
             res.json(orgs);
         });
+    });
+});
+
+app.get('/api/club/:id/datasets', isAuthenticated, function(req, res) {
+	Club.aggregate([
+        { $match: { _id: mongoose.Types.ObjectId(req.params.id) }},
+        { $project: { _id: false, datasets: true }}],
+    function(err, datasetIds) {
+        if(err) {
+            res.status(500).end();
+        }
+
+        // now fetch the dataset objects themselves
+        Dataset.find({ _id: { $in: datasetIds[0].datasets }}, function(err, datasets) {
+            if(err) {
+                res.status(500).end();
+            }
+
+            res.json(datasets);
+        });
+    });
+});
+
+app.get('/api/datasets/sponsored', isAuthenticated, function(req, res) {
+    Dataset.find({
+        sponsored: true
+    }, function(err, datasets) {
+        if(err) {
+            res.status(500).end();
+        }
+
+        res.json(datasets);
     });
 });
 

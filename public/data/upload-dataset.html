@@ -12,6 +12,11 @@
 
         <md-dialog-content>
             <div class="md-dialog-content" layout="column">
+                <!-- progress indicator -->
+                <div layout="row" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="determinate" value="{{ uploadProgress }}"></md-progress-circular>
+                </div>
+
                 <md-input-container>
                     <label>Dataset name</label>
                     <input type="text" id="name" name="name" ng-model="dataset.name" required>

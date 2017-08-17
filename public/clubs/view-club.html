@@ -1,0 +1,15 @@
+<!-- club sub-menu -->
+<md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="data club sub-navigation links">
+    <md-nav-item md-nav-sref="profile.viewClub" name="club">{{ club.name }}</md-nav-item>
+    <md-nav-item md-nav-sref="profile.viewClub.data" name="data">Data</md-nav-item>
+    <md-nav-item md-nav-sref="profile.viewClub.apps" name="apps">Apps</md-nav-item>
+    <md-nav-item md-nav-sref="profile.viewClub.discuss" name="discuss">Discuss</md-nav-item>
+</md-nav-bar>
+
+<div ui-view>
+    <!-- initial club view, removed when sub-menu item is clicked as it's inside ui-view -->
+    <h1>{{ club.name }} club</h1>
+    <h3>Goal: {{ club.description }}</h3>
+    <p>Tags: {{ club.tags }}</p>
+    <p>Open/Closed: {{ club.open ? 'Open' : 'Closed' }}</p>
+</div>

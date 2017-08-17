@@ -5,6 +5,12 @@ angular.module('DataClubsModule').factory('Clubs', function ClubsFactory($http) 
         },
         getMembers: function(id) {
             return $http.get('/api/club/' + id + '/organisations');
+        },
+        getDatasets: function(id) {
+            return $http.get('/api/club/' + id + '/datasets');
+        },
+        getSponsoredDatasets: function() {
+            return $http.get('/api/datasets/sponsored');
         }
     };
 });

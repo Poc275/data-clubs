@@ -4,9 +4,10 @@ var datasetSchema = new mongoose.Schema({
 	name: { type: String, required: true },
 	description: { type: String },
     tags: { type: String },
-    owner: { type: String, required: true },
+    owner: { type: mongoose.Schema.Types.ObjectId, required: true },
     type: { type: String },
-    url: { type: String, required: true }
+    url: { type: String, required: true },
+    sponsored: { type: Boolean, required: true }
 });
 
 // assign schema to model
