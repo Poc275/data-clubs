@@ -9,63 +9,127 @@
     </div>
 </nav>
 
-<div class="home-banner">
-    <header>
+<div class="home-banner" id="top">
+    <header class"container">
         <div class="hero-text">
             <h1>Helping customers with safeguarded sharing of data to gain operational efficiency.</h1>
         </div>
         <img class="hero-banner" src="images/main-bg.svg" alt="banner background image" />
 
         <div class="video">
-            <div class="video-container">
+            <!-- <div class="video-container"> -->
                 <video controls>
                     <source src="videos/dataclubs-animation.mp4" type="video/mp4">
                     I'm sorry, your browser doesn't support HTML5 video in MP4 format
                 </video>
-            </div>
+            <!-- </div> -->
         </div>
     </header>
 
-    <section class="main-info">
-        <h2>Data Clubs</h2>
-        <h4>Proprietary Operational Data Sharing Framework</h4>
-        <p>Airlines are undergoing a profound shift in their view  of how data can transform 
-            their operational and maintenance performance. The imperative to achieve substantial 
-            year-on-year efficiency savings driving the search for a credible partner with subject matter and data expertise.</p>
+    <section class="container main-info">
+        <h1 class="text-center">Introducing Data Clubs</h1>
+        <h3 class="text-center">A Proprietary Operational Data Sharing Framework</h3>
 
-        <p>Airlines remain unable to reap the promise of big data.</p>
-
-        <p>Digital is uniquely suited to re-imagine data as a collaborative effort and have established Data Clubs.</p>
-
-        <p>Data Clubs are a fusion of world class engineering and thought leadership n the pragmatic use of Big Data, A.I. 
-            and Machine Learning. A highly secure, highly visual platform where relative performance can be understood 
-            in a secure-proof environment.</p>
+        <div layout="row" layout-xs="column">
+            <div layout="column" class="text-center col-section" flex-gt-xs="33">
+                <img src="images/icons/airplane.svg" alt="airplane icon" class="shield" />
+                <h2>Data as a service</h2>
+                <p>Airlines are undergoing a profound shift in their view  of how data can transform 
+                    their operational and maintenance performance. The imperative to achieve substantial 
+                    year-on-year efficiency savings driving the search for a credible partner with subject matter and data expertise.</p>
+            </div>
+            
+            <div layout="column" class="text-center col-section" flex-gt-xs="33">
+                <img src="images/icons/bulb.svg" alt="data insights icon" class="shield" />
+                <h2>Why Data Clubs?</h2>
+                <p>Airlines remain unable to reap the promise of big data. Digital is uniquely suited to re-imagine 
+                    data as a collaborative effort and have established Data Clubs.</p>
+            </div>
+    
+            <div layout="column" class="text-center col-section" flex-gt-xs="33">
+                <img src="images/icons/tactics.svg" alt="how we can help icon" class="shield" />
+                <h2>How we can help</h2>
+                <p>Data Clubs are a fusion of world class engineering and thought leadership in the pragmatic use of Big Data, A.I. 
+                    and Machine Learning. A highly secure, highly visual platform where relative performance can be understood 
+                    in a secure-proof environment.</p>
+            </div>
+        </div>
     </section>
 
-    <section class="reports-info">
-        <h2>Powerful Data Reports</h2>
-        <p>Gain powerful reports providing insight into your data. Interactive by design, the value of insight is 
-            multiplied as aggregated data sets provide more ammunition for our world-class data scientists to provide 
-            incredible insight to airlines.</p>
+    <div class="divider"></div>
 
-        <h2>Leading Data Analytics</h2>
-        <p>Through Data Clubs you get access to world-leading Data Scientists and our carefully selected 
-            Small &amp; Medium Enterprise (SME) partners who will deliver analytics fueled by latest technology 
-            in Machine Learning (ML) and Artifiial Intelligence (AI).</p>
+    <section class="container reports-info">
+        <h1 class="text-center">What we can do for you</h1>
 
-        <h2>Secure Data Ingestion</h2>
-        <p>We ingest data in a secure manner. You have full control over your data and how it gets utilised in Data Clubs. 
-            We offer multiple sources of data ingestion to our customers and 3rd party data publishers. All supported by PODAF.</p>
+        <div layout="row" layout-xs="column">
+            <div layout="column" class="text-center col-section" flex-gt-xs="33">
+                <i class="fa fa-lightbulb-o fa-5x" aria-hidden="true"></i>
+                <h2>Powerful Data Reports</h2>
+                <p>Gain powerful reports providing insight into your data. Interactive by design, the value of insight is 
+                    multiplied as aggregated data sets provide more ammunition for our world-class data scientists to provide 
+                    incredible insight to airlines.</p>
+            </div>
+
+            <div layout="column" class="text-center col-section" flex-gt-xs="33">
+                <i class="fa fa-line-chart fa-5x" aria-hidden="true"></i>
+                <h2>Leading Data Analytics</h2>
+                <p>Through Data Clubs you get access to world-leading Data Scientists and our carefully selected 
+                    Small &amp; Medium Enterprise (SME) partners who will deliver analytics fueled by latest technology 
+                    in Machine Learning (ML) and Artificial Intelligence (AI).</p>
+            </div>
+
+            <div layout="column" class="text-center col-section" flex-gt-xs="33">
+                <i class="fa fa-database fa-5x" aria-hidden="true"></i>
+                <h2>Secure Data Ingestion</h2>
+                <p>We ingest data in a secure manner. You have full control over your data and how it gets utilised in Data Clubs. 
+                    We offer multiple sources of data ingestion to our customers and 3rd party data publishers. All supported by PODAF.</p>
+            </div>
+        </div>
     </section>
+
+    <div class="divider"></div>
 
     <section class="tagline-banner">
-        <h2>Delivering Results</h2>
-        <p>Helping customers with safeguarded sharing of data to gain operational efficiency.</p>
+        <div class="vertical-center">
+            <div class="container">
+                <div layout="row">
+                    <h2 class="md-display-1">Delivering Results</h2>
+                    <p>Helping customers with safeguarded sharing of data to gain operational efficiency.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <footer>
-        <section class="footer-banner">
-            <p>&copy; 2017. Data Clubs.</p>
+        <section class="container">
+            <h3>Join Now</h3>
+
+            <div layout="row" layout-xs="column">
+                <div layout="column">
+                    <p>Contact us for information on how to start your own club or join an existing one. If you've had an invite 
+                        from us to join a club just log in at the <a href="#top">top of the page</a> and get started.</p>
+                </div>
+
+                <div layout="column">
+                    <ul class="info-links">
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Help</a></li>
+                    </ul>
+                </div>
+
+                <div layout="column">
+                    <ul class="social-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <md-button class="md-raised md-primary">Get in touch</md-button>
         </section>
+
+        <p class="text-center copyright">&copy; 2017. Data Clubs.</p>
     </footer>
 </div>
