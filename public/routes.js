@@ -23,7 +23,7 @@ angular.module('DataClubsModule').config(function($stateProvider, $urlRouterProv
             controller: 'profileCtrl',
             // added state params to parent state so that they 
             // don't get reset when transitioning between child states
-            params: { clubId: null, orgId: null, orgLogoUrl: null, club: null }
+            params: { clubId: null, orgId: null, orgLogoUrl: null, club: null, forum: null }
         })
         .state('profile.clubs', {
             url: '/clubs',
@@ -40,6 +40,11 @@ angular.module('DataClubsModule').config(function($stateProvider, $urlRouterProv
             templateUrl: '/clubs/view-club.html',
             controller: 'clubCtrl'
         })
+        .state('profile.viewOrganisation', {
+            url: '/organisation/:org',
+            templateUrl: '/organisations/view-organisation-admin.html',
+            controller: 'organisationCtrl'
+        })
         .state('profile.viewClub.data', {
             url: '/data',
             templateUrl: '/data/data.html',
@@ -47,17 +52,22 @@ angular.module('DataClubsModule').config(function($stateProvider, $urlRouterProv
         })
         .state('profile.viewClub.apps', {
             url: '/apps',
-            templateUrl: '/profile/apps.html',
+            templateUrl: '/apps/apps.html',
             controller: 'profileCtrl'
+        })
+        .state('profile.viewClub.viewLineChart', {
+            url: '/apps/plot',
+            templateUrl: '/apps/line-chart-example.html',
+            controller: 'lineChartCtrl'
         })
         .state('profile.viewClub.discuss', {
             url: '/discuss',
-            templateUrl: '/profile/help.html',
-            controller: 'profileCtrl'
+            templateUrl: '/discuss/discuss.html',
+            controller: 'discussCtrl'
         })
-        .state('profile.viewOrganisation', {
-            url: '/organisation/:org',
-            templateUrl: '/organisations/view-organisation-admin.html',
-            controller: 'organisationCtrl'
+        .state('profile.viewClub.forum', {
+            url: '/discuss/forum',
+            templateUrl: '/discuss/forum.html',
+            controller: 'discussCtrl'
         });
     });

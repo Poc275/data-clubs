@@ -1,37 +1,37 @@
-<md-button class="md-raised md-primary" ng-click="showUploadDataset($event)">+ New Dataset</md-button>
+<section class="container">
+    <md-button class="md-raised md-primary" ng-click="showUploadDataset($event)">+ New Dataset</md-button>
 
-<h1>Club Datasets</h1>
-<table>
-    <tr>
-        <th>Dataset Name</th>
-        <th>Description</th>
-        <th>Tags</th>
-        <th>File type</th>
-    </tr>
+    <!-- club datasets -->
+    <h1 class="md-display-1">Club Datasets</h1>
 
-    <tr ng-repeat="dataset in clubDatasets">
-        <td ng-if="!dataset.sponsored">{{ dataset.name }}</td>
-        <td ng-if="!dataset.sponsored">{{ dataset.description }}</td>
-        <td ng-if="!dataset.sponsored">{{ dataset.tags }}</td>
-        <td ng-if="!dataset.sponsored">{{ dataset.type }}</td>
-        <td ng-if="!dataset.sponsored"><a ng-href="{{ dataset.url }}">Download</a></td>
-    </tr>
-</table>
+    <div layout="row" layout-xs="column" layout-wrap>
+        <div ng-repeat="dataset in clubDatasets" layout="column" class="text-center col-section" flex-gt-xs="25">
+            <img src="images/icons/clipboard.svg" alt="dataset icon" class="shield" ng-if="!dataset.sponsored" />
+            <h2 ng-if="!dataset.sponsored" class="md-headline">{{ dataset.name }}</h2>
+            <p ng-if="!dataset.sponsored">{{ dataset.description }}</p>
+            <p ng-if="!dataset.sponsored">
+                <i class="fa fa-tags" aria-hidden="true"></i> {{ dataset.tags }}
+            </p>
+            <md-button ng-if="!dataset.sponsored" class="md-raised" ng-href="{{ dataset.url }}">
+                <i class="fa fa-download" aria-hidden="true"></i> Download
+            </md-button>
+        </div>
+    </div>
 
-<h1>Sponsored Datasets</h1>
-<table>
-    <tr>
-        <th>Dataset Name</th>
-        <th>Description</th>
-        <th>Tags</th>
-        <th>File type</th>
-    </tr>
+    <div class="divider"></div>
 
-    <tr ng-repeat="dataset in sponsoredDatasets">
-        <td>{{ dataset.name }}</td>
-        <td>{{ dataset.description }}</td>
-        <td>{{ dataset.tags }}</td>
-        <td>{{ dataset.type }}</td>
-        <td><a ng-href="{{ dataset.url }}">Download</a></td>
-    </tr>
-</table>
+    <!-- sponsored datasets -->
+    <h1 class="md-display-1">Sponsored Datasets</h1>
+    
+    <div layout="row" layout-xs="column" layout-wrap>
+        <div ng-repeat="dataset in sponsoredDatasets" layout="column" class="text-center col-section" flex-gt-xs="25">
+            <img src="images/icons/clipboard.svg" alt="dataset icon" class="shield" />
+            <h2 class="md-headline">{{ dataset.name }}</h2>
+            <p>{{ dataset.description }}</p>
+            <p><i class="fa fa-tags" aria-hidden="true"></i> {{ dataset.tags }}</p>
+            <md-button class="md-raised" ng-href="{{ dataset.url }}">
+                <i class="fa fa-download" aria-hidden="true"></i> Download
+            </md-button>
+        </div>
+    </div>
+</section>

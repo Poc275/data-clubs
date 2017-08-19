@@ -1,0 +1,23 @@
+<section class="container">
+    <h1 class="md-display-1">Discuss</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Category</th>
+                <th>Creator</th>
+                <th>Replies</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr ng-repeat="forum in forums">
+                <td><a ui-sref="profile.viewClub.forum({ forum: forum.topic })">{{ forum.topic }}</a></td>
+                <td><i class="fa fa-tag" aria-hidden="true"></i> {{ forum.category }}</td>
+                <td>{{ forum.creator }}</td>
+                <td>{{ forum.replies }}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

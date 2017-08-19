@@ -1,0 +1,15 @@
+<section class="container">
+    <h1 class="md-display-1">{{ forumTopic }}</h1>
+    <article ng-repeat="post in posts" layout="row">
+        <img ng-src="{{ post.avatar }}" alt="user avatar" />
+
+        <div layout="column" class="post">
+            <div layout="row" class="post-details">
+                <p>{{ post.username }}</p>
+                <span flex></span>
+                <p><i class="fa fa-clock-o" aria-hidden="true"></i> {{ post.timestamp }}</p>
+            </div>
+            <p>{{ post.message }}</p>
+        </div>
+    </article>
+</section>

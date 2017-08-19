@@ -1,4 +1,4 @@
-<nav>
+<nav id="home-page-nav">
     <div class="nav-wrapper" layout="row">
         <h1><a href="/">Data Clubs</a></h1>
         <span flex></span>
@@ -9,7 +9,7 @@
     </div>
 </nav>
 
-<div class="home-banner" id="top">
+<div class="home-banner">
     <header class"container">
         <div class="hero-text">
             <h1>Helping customers with safeguarded sharing of data to gain operational efficiency.</h1>
@@ -17,23 +17,21 @@
         <img class="hero-banner" src="images/main-bg.svg" alt="banner background image" />
 
         <div class="video">
-            <!-- <div class="video-container"> -->
-                <video controls>
-                    <source src="videos/dataclubs-animation.mp4" type="video/mp4">
-                    I'm sorry, your browser doesn't support HTML5 video in MP4 format
-                </video>
-            <!-- </div> -->
+            <video controls>
+                <source src="videos/dataclubs-animation-small.mp4" type="video/mp4" preload="none" poster="images/video-poster.jpg">
+                I'm sorry, your browser doesn't support HTML5 video in MP4 format
+            </video>
         </div>
     </header>
 
     <section class="container main-info">
-        <h1 class="text-center">Introducing Data Clubs</h1>
-        <h3 class="text-center">A Proprietary Operational Data Sharing Framework</h3>
+        <h1 class="text-center md-display-1">Introducing Data Clubs</h1>
+        <h3 class="text-center md-subhead">A Proprietary Operational Data Sharing Framework</h3>
 
         <div layout="row" layout-xs="column">
             <div layout="column" class="text-center col-section" flex-gt-xs="33">
                 <img src="images/icons/airplane.svg" alt="airplane icon" class="shield" />
-                <h2>Data as a service</h2>
+                <h2 class="md-headline">Data as a service</h2>
                 <p>Airlines are undergoing a profound shift in their view  of how data can transform 
                     their operational and maintenance performance. The imperative to achieve substantial 
                     year-on-year efficiency savings driving the search for a credible partner with subject matter and data expertise.</p>
@@ -41,14 +39,14 @@
             
             <div layout="column" class="text-center col-section" flex-gt-xs="33">
                 <img src="images/icons/bulb.svg" alt="data insights icon" class="shield" />
-                <h2>Why Data Clubs?</h2>
+                <h2 class="md-headline">Why Data Clubs?</h2>
                 <p>Airlines remain unable to reap the promise of big data. Digital is uniquely suited to re-imagine 
                     data as a collaborative effort and have established Data Clubs.</p>
             </div>
     
             <div layout="column" class="text-center col-section" flex-gt-xs="33">
                 <img src="images/icons/tactics.svg" alt="how we can help icon" class="shield" />
-                <h2>How we can help</h2>
+                <h2 class="md-headline">How we can help</h2>
                 <p>Data Clubs are a fusion of world class engineering and thought leadership in the pragmatic use of Big Data, A.I. 
                     and Machine Learning. A highly secure, highly visual platform where relative performance can be understood 
                     in a secure-proof environment.</p>
@@ -59,12 +57,12 @@
     <div class="divider"></div>
 
     <section class="container reports-info">
-        <h1 class="text-center">What we can do for you</h1>
+        <h1 class="text-center md-display-1">What we can do for you</h1>
 
         <div layout="row" layout-xs="column">
             <div layout="column" class="text-center col-section" flex-gt-xs="33">
                 <i class="fa fa-lightbulb-o fa-5x" aria-hidden="true"></i>
-                <h2>Powerful Data Reports</h2>
+                <h2 class="md-headline">Powerful Data Reports</h2>
                 <p>Gain powerful reports providing insight into your data. Interactive by design, the value of insight is 
                     multiplied as aggregated data sets provide more ammunition for our world-class data scientists to provide 
                     incredible insight to airlines.</p>
@@ -72,7 +70,7 @@
 
             <div layout="column" class="text-center col-section" flex-gt-xs="33">
                 <i class="fa fa-line-chart fa-5x" aria-hidden="true"></i>
-                <h2>Leading Data Analytics</h2>
+                <h2 class="md-headline">Leading Data Analytics</h2>
                 <p>Through Data Clubs you get access to world-leading Data Scientists and our carefully selected 
                     Small &amp; Medium Enterprise (SME) partners who will deliver analytics fueled by latest technology 
                     in Machine Learning (ML) and Artificial Intelligence (AI).</p>
@@ -80,7 +78,7 @@
 
             <div layout="column" class="text-center col-section" flex-gt-xs="33">
                 <i class="fa fa-database fa-5x" aria-hidden="true"></i>
-                <h2>Secure Data Ingestion</h2>
+                <h2 class="md-headline">Secure Data Ingestion</h2>
                 <p>We ingest data in a secure manner. You have full control over your data and how it gets utilised in Data Clubs. 
                     We offer multiple sources of data ingestion to our customers and 3rd party data publishers. All supported by PODAF.</p>
             </div>
@@ -102,12 +100,12 @@
 
     <footer>
         <section class="container">
-            <h3>Join Now</h3>
+            <h3 class="md-title">Join Now</h3>
 
             <div layout="row" layout-xs="column">
                 <div layout="column">
-                    <p>Contact us for information on how to start your own club or join an existing one. If you've had an invite 
-                        from us to join a club just log in at the <a href="#top">top of the page</a> and get started.</p>
+                    <p>Contact us for information on how to start your own club. If you've had an invite 
+                        from us to join a club simply <a ui-sref="login">login</a> with the details provided to get started.</p>
                 </div>
 
                 <div layout="column">

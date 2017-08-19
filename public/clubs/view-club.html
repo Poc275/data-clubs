@@ -8,8 +8,25 @@
 
 <div ui-view>
     <!-- initial club view, removed when sub-menu item is clicked as it's inside ui-view -->
-    <h1>{{ club.name }} club</h1>
-    <h3>Goal: {{ club.description }}</h3>
-    <p>Tags: {{ club.tags }}</p>
-    <p>Open/Closed: {{ club.open ? 'Open' : 'Closed' }}</p>
+    <section class="container club-view">
+        <div ng-init="clubIcon = getRandomIcon()" layout="row" layout-xs="column">
+            <img ng-src="{{ clubIcon }}" alt="club icon" class="club-icon" />
+
+            <div layout="column">
+                <h1 class="md-display-1">{{ club.name }} Club</h1>
+                <p><i class="fa fa-clock-o" aria-hidden="true"></i> 10th August 2017</p>
+                <p><i class="fa fa-tags" aria-hidden="true"></i> {{ club.tags }}</p>
+                <h3 class="md-subhead">Club Goal</h3>
+                <p>{{ club.description }}</p>
+                <!-- <p>Tags: {{ club.tags }}</p> -->
+                <p>Status: {{ club.open ? 'Open' : 'Closed' }}</p>
+                <h3 class="md-subhead">Participants</h3>
+                <ul class="club-participants">
+                    <li ng-repeat="member in clubMembers">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i> {{ member.name }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </div>

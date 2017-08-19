@@ -1,26 +1,13 @@
-<md-button class="md-raised md-primary" ng-click="showCreateClubDialog($event)" ng-if="profile.admin">+ New Club</md-button>
+<section class="container">
+    <md-button class="md-raised md-primary" ng-click="showCreateClubDialog($event)" ng-if="profile.admin">+ New Club</md-button>
+    <h1 class="md-display-1">My Clubs</h1>
 
-<h1>My Clubs</h1>
-
-<table>
-    <tr>
-        <th>Club Name</th>
-        <!-- <th>Description</th> -->
-        <!-- <th>Tags</th> -->
-        <!-- <th>Open/Closed</th> -->
-    </tr>
-
-    <tr ng-repeat="club in myClubs">
-        <td>{{ club.name }}</td>
-        <!-- <td>{{ club.description }}</td> -->
-        <!-- <td>{{ club.tags }}</td> -->
-        <!-- <td>{{ club.open ? 'Open' : 'Closed' }}</td> -->
-        <td>
+    <div layout="row" layout-xs="column" layout-wrap>
+        <div ng-repeat="club in myClubs" ng-init="clubIcon = getRandomIcon()" layout="column" class="text-center col-section" flex-gt-xs="25">
+            <img ng-src="{{ clubIcon }}" alt="club icon" class="shield" />
+            <h2 class="md-headline">{{ club.name }}</h2>
             <md-button class="md-raised md-primary" ui-sref="profile.viewClub({ name: club.name, club: club })">View</md-button>
-        </td>
-        <td ng-if="profile.admin">
-            <md-button class="md-raised" ui-sref="profile.viewClubAdmin({ name: club.name, clubId: club._id })">Admin</md-button>
-        </td>
-    </tr>
-</table>
-
+            <md-button ng-if="profile.admin" class="md-raised" ui-sref="profile.viewClubAdmin({ name: club.name, clubId: club._id })">Admin</md-button>
+        </div>
+    </div>
+</section>

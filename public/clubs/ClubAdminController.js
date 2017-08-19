@@ -1,6 +1,7 @@
 angular.module('DataClubsModule').controller('clubAdminCtrl', function($scope, $http, $state, $mdDialog, $location, $stateParams, Clubs, Organisation) {
     $scope.clubName = $stateParams.name;
     $scope.clubId = $stateParams.clubId;
+    $scope.customFullscreen = true;
 
     // load organisations for this club
     $scope.getClubOrganisations = function() {
@@ -17,7 +18,8 @@ angular.module('DataClubsModule').controller('clubAdminCtrl', function($scope, $
           templateUrl: '/organisations/add-organisation.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose: true
+          clickOutsideToClose: true,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
         })
         .then(function(answer) {
             // update list of orgs

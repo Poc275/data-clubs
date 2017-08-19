@@ -12,11 +12,6 @@
 
         <md-dialog-content>
             <div class="md-dialog-content" layout="column">
-                <!-- progress indicator -->
-                <div layout="row" layout-sm="column" layout-align="space-around">
-                    <md-progress-circular md-mode="determinate" value="{{ uploadProgress }}"></md-progress-circular>
-                </div>
-
                 <md-input-container>
                     <label>Dataset name</label>
                     <input type="text" id="name" name="name" ng-model="dataset.name" required>
@@ -35,21 +30,24 @@
                     <input type="text" id="tags" name="tags" ng-model="dataset.tags" required>
                 </md-input-container>
             
+                <div ng-show="!showProgress" id="file-upload">
+                    <div id="files-drop-zone" nv-file-drop uploader="uploader">Drop file here</div>
 
-                <div id="files-drop-zone" nv-file-drop uploader="uploader">Drop file here</div>
+                    <p class="text-center">&mdash; OR &mdash;</p>
 
-                <div class="separator">
-                    <span class="text">OR</span>
+                    <input type="file" nv-file-select uploader="uploader"/>
+
+                    <ul>
+                        <li ng-repeat="item in uploader.queue">
+                            Name: <span ng-bind="item.file.name"></span><br/>
+                        </li>
+                    </ul>
                 </div>
 
-                <input type="file" nv-file-select uploader="uploader"/>
-
-                <ul>
-                    <li ng-repeat="item in uploader.queue">
-                        Name: <span ng-bind="item.file.name"></span><br/>
-                        <!-- <button ng-click="item.upload()">upload</button> -->
-                    </li>
-                </ul>
+                <!-- progress indicator -->
+                <div ng-show="showProgress" layout="row" layout-sm="column" layout-align="space-around">
+                    <md-progress-circular md-mode="determinate" value="{{ uploadProgress }}"></md-progress-circular>
+                </div>
 
             </div>
         </md-dialog-content>

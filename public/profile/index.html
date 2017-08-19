@@ -1,11 +1,7 @@
 <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
     <md-nav-item md-nav-sref="profile.clubs" name="clubs">Clubs</md-nav-item>
-    <!-- <md-nav-item md-nav-sref="profile.data" name="data">Data</md-nav-item> -->
-    <!-- <md-nav-item md-nav-sref="profile.apps" name="apps">Apps</md-nav-item> -->
-    <!-- <md-nav-item md-nav-sref="profile.help" name="help">Help</md-nav-item> -->
-
     <span flex></span>
-    <p>Welcome {{ profile.name }}</p>
+    <p class="navbar-name">Welcome {{ profile.name }}</p>
     <md-button class="md-raised md-primary" ng-click="signOut()">Sign Out</md-button>
 </md-nav-bar>
 

@@ -2,6 +2,7 @@ angular.module('DataClubsModule').controller('organisationCtrl', function($scope
     $scope.orgName = $stateParams.org;
     $scope.orgId = $stateParams.orgId;
     $scope.logoUrl = $stateParams.orgLogoUrl;
+    $scope.customFullscreen = true;
 
     // load organisation members
     $scope.getOrganisationMembers = function() {
@@ -18,7 +19,8 @@ angular.module('DataClubsModule').controller('organisationCtrl', function($scope
           templateUrl: '/organisations/create-member.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose: true
+          clickOutsideToClose: true,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
         })
         .then(function(answer) {
             // update list of members

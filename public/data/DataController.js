@@ -1,5 +1,7 @@
 angular.module('DataClubsModule').controller('dataCtrl', function($scope, $http, $state, $mdDialog, $location, $stateParams, Clubs, User) {
     $scope.clubId = $stateParams.club._id;
+    $scope.showProgress = false;
+    $scope.fileDropped = false;
 
     $scope.getClubDatasets = function() {
         Clubs.getDatasets($scope.clubId).then(function(datasets) {
@@ -50,22 +52,25 @@ angular.module('DataClubsModule').controller('dataCtrl', function($scope, $http,
         };
 
         $scope.onSubmit = function() {
-            console.log('uploading: ', $scope.dataset);
+            $scope.showProgress = true;
 
             // assign form data to fileItem to send together
             $scope.uploader.queue[0].formData[0] = $scope.dataset;
+
+            $scope.uploader.queue[0].onAfterAddingFile = function(item) {
+                // item dropped, change drop area display
+                $scope.fileDropped = true;
+            };
 
             $scope.uploader.queue[0].onProgress = function(progress) {
                 $scope.uploadProgress = progress;
             };
 
             $scope.uploader.queue[0].onSuccess = function(response, status, headers) {
-                console.log('most success: ', response, status, headers);
                 $scope.hide();
             };
 
             $scope.uploader.queue[0].onError = function(response, status, headers) {
-                console.log('most regrettable: ', response);
                 $scope.hide();
             };
 
