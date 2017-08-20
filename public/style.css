@@ -190,13 +190,13 @@ header {
     }
 
     .video {
-        bottom: 0;
+        bottom: -3%;
     }
 
     .video video {
-        width: 60%;
-        left: 48%;
-        max-width: 450px;
+        width: 46%;
+        left: 52%;
+        max-width: 376px;
     }
 }
 
